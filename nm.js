@@ -1,29 +1,31 @@
 class NM {
-  constructor(m, a = 0, b = 0) {
-    this.m = m
-    this.a = a
-    this.b = b
+  constructor(m, a = 0.001, b = 0.002, name) {
+    this.m = +m.toFixed(6)
+    this.a = +a.toFixed(6)
+    this.b = +b.toFixed(6)
+    if (name) {
+      this.name = name
+    }
+  }
+
+  addName(name) {
+    return new NM(this.m, this.a, this.b, name)
   }
 
   add(obj) {
-    const mm = this.m + obj.m
-    const aa = this.a + obj.a
-    const bb = this.b + obj.b
-    return new NM(mm, aa, bb)
+    return new NM(this.m + obj.m, this.a + obj.a, this.b + obj.b)
   }
 
   diff(obj) {
-    const mm = this.m - obj.m
-    const aa = this.a + obj.a
-    const bb = this.b + obj.b
-    return new NM(mm, aa, bb)
+    return new NM(this.m - obj.m, this.a + obj.a, this.b + obj.b)
   }
 
   mul(obj) {
-    const mm = this.m * obj.m
-    const aa = this.m * obj.a + obj.m * this.a
-    const bb = this.m * obj.b + obj.m * this.b
-    return new NM(mm, aa, bb)
+    return new NM(
+      this.m * obj.m,
+      this.m * obj.a + obj.m * this.a,
+      this.m * obj.b + obj.m * this.b
+    )
   }
 
   pow(n) {
